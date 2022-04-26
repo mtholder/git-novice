@@ -285,29 +285,7 @@ If we break it down into pieces:
 After reviewing our change, it's time to commit it:
 
 ~~~
-$ git commit -m "Add concerns about effects of Mars' moons on Wolfman"
-~~~
-{: .language-bash}
-
-~~~
-On branch main
-Changes not staged for commit:
-  (use "git add <file>..." to update what will be committed)
-  (use "git checkout -- <file>..." to discard changes in working directory)
-
-	modified:   mars.txt
-
-no changes added to commit (use "git add" and/or "git commit -a")
-~~~
-{: .output}
-
-Whoops:
-Git won't commit because we didn't use `git add` first.
-Let's fix that:
-
-~~~
-$ git add mars.txt
-$ git commit -m "Add concerns about effects of Mars' moons on Wolfman"
+$ git commit -m "Add concerns about effects of Mars' moons on Wolfman" -a
 ~~~
 {: .language-bash}
 
@@ -317,24 +295,27 @@ $ git commit -m "Add concerns about effects of Mars' moons on Wolfman"
 ~~~
 {: .output}
 
-Git insists that we add files to the set we want to commit
-before actually committing anything. This allows us to commit our
-changes in stages and capture changes in logical portions rather than
-only large batches.
-For example,
-suppose we're adding a few citations to relevant research to our thesis.
-We might want to commit those additions,
-and the corresponding bibliography entries,
-but *not* commit some of our work drafting the conclusion
-(which we haven't finished yet).
 
-To allow for this,
-Git has a special *staging area*
-where it keeps track of things that have been added to
-the current [changeset]({{ page.root }}{% link reference.md %}#changeset)
-but not yet committed.
+The `-a` flag tells git to commit changes to _all_ of the files that have been 
+previously added to your repository. 
+Some people prefer to only add a subset of their changes to a commit. 
+You can do this by adding files (or even subsets of files) using the
+`git add` command.
+For instance, we could have used `git add mars.txt` before the 
+`git commit ...` line and then left the `-a` flag off.
+
+I (MTH) recommend that beginning `git` users simply use the `-a` flag, so
+that they don't have to learn about the "staging area" of git.
+If you are interested in learning about the staging area, read the next section.
+Otherwise you can skip to the <a href="#word-based-diffing">word based diffing section</a>.
 
 > ## Staging Area
+>
+> To allow for for commits to include only subsets of the local modifications
+> to your local filesystem, git has a special *staging area*
+> where it keeps track of things that have been added to
+> the current [changeset]({{ page.root }}{% link reference.md %}#changeset)
+> but not yet committed.
 >
 > If you think of Git as taking snapshots of changes over the life of a project,
 > `git add` specifies *what* will go in a snapshot
